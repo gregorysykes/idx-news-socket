@@ -12,4 +12,4 @@ io.on('connection',(socket)=>{
         socket.broadcast.emit('receive_message',data)
     })
 })
-http.listen(8080)
+http.listen(process.env.PORT)
