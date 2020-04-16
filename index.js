@@ -5,11 +5,11 @@ app.get('/', (req, res) => {
 })
 
 
-const socketio = require('socket.io')(http)
+const io = require('socket.io')(http)
 
-socketio.on('connection',(userSocket)=>{
-    userSocket.on('send_message',(data)=>{
-        userSocket.broadcast.emit('receive_message',data)
+io.on('connection',(socket)=>{
+    socket.on('send_message',(data)=>{
+        socket.emit('receive_message',data)
     })
 })
 http.listen(process.env.PORT)
