@@ -1,8 +1,6 @@
 const app = require('express')()
 const http = require('http').createServer(app)
-app.get('/', (req, res) => {
-   res.send("Welcome!!")
-})
+
 
 const io = require('socket.io')(http)
 
@@ -24,8 +22,12 @@ count = 0
 news = ''
 all_news = []
 temp_title = ''
+resp = ''
 
 client.on('data', function(chunk){
+    if(chunk == null){
+        resp = '[-]'
+    }
     string = chunk.toString().split('\r\n')
     str = string[0].toString().split('|')
     // console.log(str)
@@ -105,6 +107,10 @@ client.on('data', function(chunk){
         }
 
     }
+})
+
+app.get('/', (req, res) => {
+    res.send(resp+" Welcome!!")
 })
 
 app.get('/news', (req, res) => {
