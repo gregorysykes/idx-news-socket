@@ -22,24 +22,22 @@ count = 0
 news = ''
 all_news = []
 temp_title = ''
-resp = ''
+resp = '[-]'
 
 client.on('data', function(chunk){
-    if(chunk == null){
-        resp = '[-]'
-    }
+    
     string = chunk.toString().split('\r\n')
+    resp = string
     str = string[0].toString().split('|')
-    // console.log(str)
 
     //remove index when array size 100
     if(all_news.length == 100){
-        all_news.shift()
+        all_news.pop()
     }
 
     //select if news
     if(str[1] == 'd'){
-        // console.log(str)
+        console.log(str)
         //news
         newsLength = str[3]
         newsIndex = str[4]
@@ -56,19 +54,15 @@ client.on('data', function(chunk){
                 }
             }
 
-            all_news.push({
+            all_news.unshift({
                 'title':newsTitle,
                 'tag':newsTag,
                 'date':newsDate,
                 'time':newsTime,
                 'news':text
             })
-
-            // json = JSON.stringify(all_news)
-            // console.log(json)
-
-        }else if(newsLength > newsIndex){
             
+        }else if(newsLength > newsIndex){
             if(temp_title != ''){
                 if(temp_title == newsTitle){
                     count++
@@ -89,16 +83,13 @@ client.on('data', function(chunk){
                 }
                 if(count == newsLength){
                     news += text
-                    all_news.push({
+                    all_news.unshift({
                         'title':newsTitle,
                         'tag':newsTag,
                         'date':newsDate,
                         'time':newsTime,
                         'news':news
                     })
-        
-                    // json = JSON.stringify(all_news, null, 3)
-                    // console.log(json) 
                 } 
                 news = ''
                 count = 0
@@ -110,7 +101,7 @@ client.on('data', function(chunk){
 })
 
 app.get('/', (req, res) => {
-    res.send(resp+" Welcome!!")
+    res.send("Welcome!!")
 })
 
 app.get('/news', (req, res) => {
