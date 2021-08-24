@@ -1,0 +1,33 @@
+news: http://marketinfo.investindosekuritas.co.id:8899/news
+
+commodities: http://marketinfo.investindosekuritas.co.id:8899/commodities
+format:
+{
+   "LCONY": {
+      "name": "L. Crude Oil NYM",
+      "price": 59.79,
+      "change": 1.2
+   },
+}
+
+currencies: http://marketinfo.investindosekuritas.co.id:8899/currencies
+format:
+{
+   "EUR-USD": {
+      "name": "EUR/USD",
+      "price": 1.178,
+      "change": 0.001
+   },
+}
+
+indices: http://marketinfo.investindosekuritas.co.id:8899/indices
+format:
+{
+   "SHCI": {
+      "name": "Shanghai Composite",
+      "price": 3418.82,
+      "change": 55.23
+   },
+}
+
+untuk commodities, currencies, dan indices, hanya menggunakan quote yang disediakan oleh API saja
